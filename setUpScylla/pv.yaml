@@ -1,0 +1,80 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: scylla-data-a
+  labels:
+    type: local
+    app: scylla
+spec:
+  capacity:
+    storage: 1Gi
+  accessModes:
+    - ReadWriteOnce
+  hostPath:
+    path: /cputdata/volume/scylla/scy-vol-a
+  persistentVolumeReclaimPolicy: Retain
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: scylla-data-b
+  labels:
+    type: local
+    app: scylla
+spec:
+  capacity:
+    storage: 1Gi
+  accessModes:
+    - ReadWriteOnce
+  hostPath:
+    path: /cputdata/volume/scylla/scy-vol-b
+  persistentVolumeReclaimPolicy: Retain
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: scylla-data-c
+  labels:
+    type: local
+    app: scylla
+spec:
+  capacity:
+    storage: 1Gi
+  accessModes:
+    - ReadWriteOnce
+  hostPath:
+    path: /cputdata/volume/scylla/scy-vol-c
+  persistentVolumeReclaimPolicy: Retain
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: scylla-data-d
+  labels:
+    type: local
+    app: scylla
+spec:
+  capacity:
+    storage: 1Gi
+  accessModes:
+    - ReadWriteOnce
+  hostPath:
+    path: /cputdata/volume/scylla/scy-vol-d
+  persistentVolumeReclaimPolicy: Retain
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: scylla-data-e
+  labels:
+    type: local
+    app: scylla
+spec:
+  capacity:
+    storage: 1Gi
+  accessModes:
+    - ReadWriteOnce
+  hostPath:
+    path: /cputdata/volume/scylla/scy-vol-e
+  persistentVolumeReclaimPolicy: Retain
+---
