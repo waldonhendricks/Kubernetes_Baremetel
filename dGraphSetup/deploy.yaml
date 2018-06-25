@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: dgraph-ratel
+  labels:
+    app: dgraph-ratel
+spec:
+  selector:
+    matchLabels:
+      app: dgraph-ratel
+  template:
+    metadata:
+      labels:
+        app: dgraph-ratel
+    spec:
+      containers:
+      - name: ratel
+        image: dgraph/dgraph:latest
+        ports:
+        - containerPort: 8000
+        command:
+          - dgraph-ratel
