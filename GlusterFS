@@ -1,0 +1,58 @@
+ #to configure time zone
+ dpkg-reconfigure tzdata
+  
+  sudo timedatectl set-ntp no
+	sudo apt-get install ntp
+	
+  #list the partitions
+  fdisk -l 
+	
+  #make sure there is an empty partiotion dev/sdb1 else create one using assuming sdb is the biggest partiotion
+  fdisk /dev/sdb
+	
+  #then make xfs file system
+	mkfs.xfs /dev/sdb1
+	
+  #create a directory for your gluster node
+	mkdir -p /gluster/bricknodeX   #NOTE:replace x with your node number
+	
+	echo '/dev/sdb1 /glusterfs/bricknodeX xfs defaults 1 2' >> /etc/fstab #replace X with node number
+	mount -a && mount
+
+
+sudo add-apt-repository ppa:gluster/glusterfs-4.0
+sudo apt-get update
+
+
+	
+	sudo apt install xfsprogs attr -y
+	
+	apt install xfsprogs attr glusterfs-server glusterfs-common glusterfs-client -y
+	gluster peer probe nodeName
+	gluster pool list
+	
+	
+	# after you create all the gluster nodes (here it's Gnode1, Gnode2, node3)
+	sudo gluster volume create CputProVolume replica 3 transport tcp \
+	  Gnode1:/glusterfs/bricknode1/brick \
+	  Gnode2:/glusterfs/bricknode2/brick \
+	  node3:/glusterfs/bricknode3/brick \
+	  force
+	  
+	  sudo su -c 'echo "localhost:/CputProVolume /cputdata glusterfs defaults,_netdev,backupvolfile-server=$(hostname) 0 0" >> /etc/fstab'
+	
+	
+	mount -a
+	
+	sudo add-apt-repository ppa:gluster/glusterfs-4.0
+	apt-get update
+	
+	mkdir /cputdata
+	apt-get -y install glusterfs-client
+	
+	# In fstab
+#	node1:/CputProVolume /cputdata glusterfs defaults,_netdev 0 0
+	
+# On each client nodes 
+	mount -t glusterfs AnyGlusterNode:/CputProVolume /cputdata
+  
