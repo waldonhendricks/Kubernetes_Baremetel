@@ -54,5 +54,5 @@ sudo apt-get update
 #	node1:/CputProVolume /cputdata glusterfs defaults,_netdev 0 0
 	
 # On each client nodes 
-	mount -t glusterfs AnyGlusterNode:/CputProVolume /cputdata
+	mount -t glusterfs Gnode:/CputProVolume /cputdata
   
